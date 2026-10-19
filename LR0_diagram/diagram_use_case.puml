@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Педагог" as Teacher
+actor "Завуч" as DeputyDirector
+actor "Администратор" as Admin
+
+rectangle "Приложение «Диалог с родителями»" {
+  usecase "Войти в систему" as UC1
+  usecase "Открыть карточку обучающегося" as UC2
+  usecase "Зарегистрировать беседу" as UC3
+  usecase "Указать участников беседы" as UC4
+  usecase "Зафиксировать содержание" as UC5
+  usecase "Создать договорённость" as UC6
+  usecase "Отметить выполнение" as UC7
+  usecase "Сформировать отчёт" as UC8
+  usecase "Управлять пользователями" as UC9
+}
+
+Teacher --> UC1
+Teacher --> UC2
+Teacher --> UC3
+Teacher --> UC8
+DeputyDirector --> UC2
+DeputyDirector --> UC3
+DeputyDirector --> UC7
+Admin --> UC9
+UC3 ..> UC4 : <<include>>
+UC3 ..> UC5 : <<include>>
+UC6 ..> UC3 : <<extend>>
+@enduml

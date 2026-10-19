@@ -1,0 +1,91 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+enum UserRole {
+  ADMIN
+  HEAD_TEACHER
+  TEACHER
+}
+
+enum ConversationStatus {
+  PLANNED
+  COMPLETED
+  CANCELLED
+}
+
+class User {
+  - id: UUID
+  - fullName: string
+  - email: string
+  - passwordHash: string
+  - role: UserRole
+  + login(email, password): boolean
+  + logout(): void
+}
+
+class Teacher {
+  - position: string
+  + openStudentCard(s: Student): void
+  + createConversation(s: Student): Conversation
+}
+
+class HeadTeacher {
+  + completeFollowUp(f: FollowUp): void
+}
+
+class Admin {
+  + manageUsers(): void
+}
+
+class Student {
+  - id: UUID
+  - fullName: string
+  - birthDate: Date
+  + getParents(): Parent[]
+}
+
+class Parent {
+  - id: UUID
+  - fullName: string
+  - phone: string
+}
+
+class Conversation {
+  - id: UUID
+  - dateTime: DateTime
+  - topic: string
+  - content: string
+  - status: ConversationStatus
+  + complete(): void
+  + addParticipant(p: Parent): void
+}
+
+class Participant {
+  - attended: boolean
+}
+
+class FollowUp {
+  - id: UUID
+  - description: string
+  - dueDate: Date
+  - isCompleted: boolean
+  + markCompleted(): void
+}
+
+Teacher --|> User
+HeadTeacher --|> Teacher
+Admin --|> HeadTeacher
+
+Student "*" -- "*" Parent : законные представители >
+Teacher "1" -- "*" Student : закреплён за >
+
+Teacher "1" -- "*" Conversation : проводит >
+Conversation "1" *-- "*" Participant : содержит > 
+Participant "*" -- "1" Parent : участник >
+
+Conversation "1" *-- "*" FollowUp : порождает >
+
+User ..> UserRole
+Conversation ..> ConversationStatus
+@enduml

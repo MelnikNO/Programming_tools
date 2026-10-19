@@ -1,0 +1,55 @@
+@startuml
+skinparam maxMessageSize 150
+autonumber
+
+actor "Педагог" as Teacher
+participant "Интерфейс (UI)\nФорма беседы" as UI
+participant "Контроллер\n(ConversationController)" as Ctrl
+participant "Сервис\n(ConversationService)" as Service
+database "База данных\n(SQL)" as DB
+
+Teacher -> UI : Открывает карточку ученика\nи нажимает «Создать беседу»
+activate UI
+
+UI -> Ctrl : GET /students/{id}/conversations/new
+activate Ctrl
+
+Ctrl --> UI : Возвращает пустую форму
+deactivate Ctrl
+
+Teacher -> UI : Заполняет тему, содержание,\nвыбирает родителей из списка
+Teacher -> UI : Нажимает кнопку «Сохранить»
+
+UI -> Ctrl : POST /conversations\n(отправляет данные формы)
+activate Ctrl
+
+Ctrl -> Service : create_conversation(data, teacher_id)
+activate Service
+
+Service -> Service : Валидация данных\n(проверка: тема не пустая,\nвыбран хотя бы 1 родитель)
+
+alt Данные корректны
+    Service -> DB : INSERT INTO conversations...
+    activate DB
+    DB --> Service : OK (id беседы)
+    deactivate DB
+    
+    Service -> DB : INSERT INTO participants...\n(сохранение родителей)
+    activate DB
+    DB --> Service : OK
+    deactivate DB
+    
+    Service --> Ctrl : Возвращает созданный объект
+    Ctrl --> UI : 201 Created (Успех)
+    UI --> Teacher : Показывает сообщение\n«Беседа успешно сохранена»
+    
+else Ошибка валидации (нет родителей или темы)
+    Service --> Ctrl : Ошибка (ValidationError)
+    Ctrl --> UI : 400 Bad Request
+    UI --> Teacher : Подсвечивает красным поля\nс ошибками
+end
+
+deactivate Service
+deactivate Ctrl
+deactivate UI
+@enduml
