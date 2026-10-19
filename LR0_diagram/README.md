@@ -63,7 +63,7 @@
 
 Раскрывает функциональные границы системы и роли пользователей.
 
-[Код]()
+[Код](https://github.com/MelnikNO/Programming_tools/blob/main/LR0_diagram/diagram_use_case.puml)
 
 <img width="528" height="316" alt="image" src="https://github.com/user-attachments/assets/064bae73-dd6a-4ab9-be68-e0b63a466c0e" />
 
@@ -73,9 +73,9 @@
 
 Отражает статическую структуру данных и связи между сущностями.
 
-[Код]()
+[Код](https://github.com/MelnikNO/Programming_tools/blob/main/LR0_diagram/diagram_classes.puml)
 
-[Программный код, который будет использоваться для разработки программного решения]()
+[Программный код, который будет использоваться для разработки программного решения](https://github.com/MelnikNO/Programming_tools/blob/main/LR0_diagram/diagram_classes.py)
 
 
 <img width="528" height="560" alt="image" src="https://github.com/user-attachments/assets/36e23da3-d96e-45c9-bd9e-dc4014d17627" />
@@ -86,7 +86,7 @@
 
 Показывает взаимодействие слоев системы при регистрации беседы.
 
-[Код]()
+[Код](https://github.com/MelnikNO/Programming_tools/blob/main/LR0_diagram/diagram_Sequence.puml)
 
 <img width="528" height="696" alt="image" src="https://github.com/user-attachments/assets/131a3fdb-fe58-43ce-93ec-8aac39deb8d7" />
 
@@ -97,7 +97,7 @@
 
 Демонстрирует жизненный цикл сущности «Беседа».
 
-[Код]()
+[Код](https://github.com/MelnikNO/Programming_tools/blob/main/LR0_diagram/diagram_State.puml)
 
 <img width="528" height="470" alt="image" src="https://github.com/user-attachments/assets/a8364963-fdc7-46b3-90d1-821e284884ed" />
 
@@ -109,7 +109,7 @@
 
 <img width="528" height="909" alt="image" src="https://github.com/user-attachments/assets/a5c12884-2e5e-4054-a205-f6f665e24bdf" />
 
-[Код]()
+[Код](https://github.com/MelnikNO/Programming_tools/blob/main/LR0_diagram/diagram_Activity.puml)
 
 Процесс разделен на дорожки (Swimlanes), показывающие зоны ответственности «Педагога» и «Системы». Отражены проверки: заполнены ли обязательные поля, нужно ли создавать задачу (договорённость), требуется ли сформировать отчет. В случае ошибки система возвращает пользователя на шаг исправления данных.
 
